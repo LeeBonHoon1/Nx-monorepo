@@ -1,9 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
-
-// importing the component from the library
 import { ProductList } from '@react-monorepo/products';
+import useGetArtists from '../hooks/use-get-artists';
 
 function Home() {
+  const { data, error, isLoading } = useGetArtists();
+  console.log(data, '<<<<<<');
+  console.log(error, '<<<<<<');
+  console.log(isLoading, '<<<<<<');
   return <h1>Home</h1>;
 }
 

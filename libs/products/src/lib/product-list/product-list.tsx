@@ -5,7 +5,7 @@
 export function ProductList(props: ProductListProps) {
   return (
     <div>
-      <button className="">{props.test ?? ''}</button>
+      <button className="font-bold">{props.test ?? ''}</button>
     </div>
   );
 }
