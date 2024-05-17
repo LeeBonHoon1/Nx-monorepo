@@ -6,7 +6,7 @@ export interface ProductListProps {
 export function ProductList(props: ProductListProps) {
   return (
     <div>
-      <h1>Welcome to ProductList!!@</h1>
+      <h1>{props.test ?? ''}</h1>
     </div>
   );
 }

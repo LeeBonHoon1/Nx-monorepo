@@ -11,7 +11,10 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />}></Route>
-      <Route path="/products" element={<ProductList test={'test'} />}></Route>
+      <Route
+        path="/products"
+        element={<ProductList test={'apps to libs message'} />}
+      />
     </Routes>
   );
 }
