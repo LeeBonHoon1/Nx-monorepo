@@ -1,22 +1,28 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { ProductList } from '@react-monorepo/products';
-import useGetArtists from '../hooks/use-get-artists';
-
-function Home() {
-  const { data, error, isLoading } = useGetArtists();
-  console.log(data, '<<<<<<');
-  console.log(error, '<<<<<<');
-  console.log(isLoading, '<<<<<<');
-  return <h1>Home</h1>;
-}
+import useGetProducts from '../hooks/use-get-artists';
 
 export function App() {
+  const router = useNavigate();
+  const { data, error, isLoading } = useGetProducts({
+    queryKey: ['products'],
+    staleTime: 1000,
+    gcTime: 2000,
+  });
+
+  if (error) router('/error');
+
   return (
     <Routes>
-      <Route path="/" element={<Home />}></Route>
       <Route
         path="/products"
-        element={<ProductList test={'apps to libs message'} />}
+        element={
+          <ProductList
+            products={data || []}
+            isLoading={isLoading}
+            text={'props text'}
+          />
+        }
       />
     </Routes>
   );

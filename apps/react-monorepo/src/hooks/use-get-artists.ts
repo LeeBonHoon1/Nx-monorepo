@@ -1,11 +1,29 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryOptions, QueryKey } from '@tanstack/react-query';
 import APIs from '../apis';
+import { Products } from '../types';
+import { AxiosError } from 'axios';
 
-const useGetArtists = () => {
-  const { data, error, isLoading } = useQuery({
-    queryKey: ['artists'],
+// Extend the options to match UseQueryOptions and add default value for options
+const useGetProducts = (
+  options?: UseQueryOptions<Products[], AxiosError, Products[]>
+) => {
+  const queryOptions: UseQueryOptions<
+    Products[],
+    AxiosError,
+    Products[],
+    QueryKey
+  > = {
+    queryKey: [options?.queryKey],
     queryFn: APIs.getArtist,
-  });
+    ...(options ?? {}),
+  };
+
+  const { data, error, isLoading } = useQuery<
+    Products[],
+    AxiosError,
+    Products[],
+    QueryKey
+  >(queryOptions);
 
   return {
     data,
@@ -14,4 +32,4 @@ const useGetArtists = () => {
   };
 };
 
-export default useGetArtists;
+export default useGetProducts;
